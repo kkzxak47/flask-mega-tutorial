@@ -6,7 +6,7 @@ from app import app
 @app.route('/index')
 def index():
     user = {'nickname': 'Miguel'}  # fake user
-    title = "TTT"
+    title = "Flask mega tutorial"
     posts = [  # fake array of posts
         {
             'author': {'nickname': 'John'},
