@@ -28,7 +28,7 @@ function set_openid(openid, pr)
           <a href="javascript:set_openid('{{ pr.url }}', '{{ pr.name }}');">{{ pr.name }}</a> |
         {% endfor %}
       </p>
-      <p>{{ form.remember_me }} Remember Me</p>
+      <p>{{ form.remember_me }} <label for="remember_me">Remember Me</label></p>
       <p><input type="submit" value="Sign In"></p>
   </form>
 {% endblock %}
