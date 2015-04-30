@@ -1,3 +1,5 @@
+
+import logging
 from flask import render_template, flash, redirect, session, url_for, request, g
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from app import app, db, lm
@@ -20,6 +22,7 @@ def login():
         user = User.query.filter(User.email == form.email.data).first()
         if user:
             login_user(user)
+            # app.logger.user[1]
             flash("Logged in successfully.")
             return redirect(request.args.get("next") or url_for("index"))
         else:
@@ -89,6 +92,8 @@ def logout():
 
 @app.errorhandler(404)
 def not_found_error(error):
+    app.logger.info('404 error.')
+    app.logger.debug(error.message)
     return render_template('404.html'), 404
 
 
