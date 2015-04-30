@@ -1,3 +1,10 @@
 #!/usr/bin/env python2
+
+import socket
 from app import app
-app.run(debug=True, host='0.0.0.0')
+
+if socket.gethostname().startswith('DigitalOcean'):
+    app.run(debug=True, host='0.0.0.0')
+else:
+    app.run(debug=False)
+

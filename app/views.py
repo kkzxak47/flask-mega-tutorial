@@ -1,3 +1,5 @@
+
+import logging
 from flask import render_template, flash, redirect, session, url_for, request, g
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from app import app, db, lm
@@ -21,6 +23,7 @@ def login():
         user = User.query.filter(User.email == form.email.data).first()
         if user:
             login_user(user)
+            # app.logger.user[1]
             flash("Logged in successfully.")
             return redirect(request.args.get("next") or url_for("index"))
         else:
@@ -65,6 +68,7 @@ def after_login(resp):
         nickname = resp.nickname
         if nickname is None or nickname == "":
             nickname = resp.email.split('@')[0]
+        nickname = User.make_unique_nickname(nickname)
         user = User(nickname=nickname, email=resp.email)
         db.session.add(user)
         db.session.commit()
@@ -123,3 +127,16 @@ def edit():
         form.nickname.data = g.user.nickname
         form.about_me.data = g.user.about_me
     return render_template('edit.html', form=form)
+
+
+@app.errorhandler(404)
+def not_found_error(error):
+    app.logger.info('404 error.')
+    app.logger.debug(error.message)
+    return render_template('404.html'), 404
+
+
+@app.errorhandler(500)
+def internal_error(error):
+    db.session.rollback()
+    return render_template('500.html'), 500
