@@ -1,3 +1,5 @@
+test.db
+db_repository/
 app.db
 tmp/
 # Byte-compiled / optimized / DLL files
