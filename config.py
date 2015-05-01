@@ -15,11 +15,10 @@ SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 
 # mail server settings
-MAIL_SERVER = 'localhost'
-MAIL_PORT = 25
-MAIL_USERNAME = ''
-MAIL_PASSWORD = ''
+MAIL_SERVER = 'smtp.gmail.com'
+MAIL_PORT = 465
+MAIL_USERNAME = 'kkzxak47'
+MAIL_PASSWORD = 'bl58tphppeGMAIL'
 
 # administrator list
-ADMINS = ['kkzxak47@localhost']
-
+ADMINS = ['kkzxak47@163.com']
