@@ -23,7 +23,7 @@ def login():
         user = User.query.filter(User.email == form.email.data).first()
         if user:
             login_user(user)
-            app.logger.user[1]
+            # app.logger.user[1]  # this is a bug for logging test
             flash("Logged in successfully.")
             return redirect(request.args.get("next") or url_for("index"))
         else:
