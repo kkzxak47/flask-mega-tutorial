@@ -23,7 +23,7 @@ def login():
         user = User.query.filter(User.email == form.email.data).first()
         if user:
             login_user(user)
-            # app.logger.user[1]
+            app.logger.user[1]
             flash("Logged in successfully.")
             return redirect(request.args.get("next") or url_for("index"))
         else:
@@ -115,7 +115,7 @@ def user(nickname):
 @app.route('/edit', methods=['GET', 'POST'])
 @login_required
 def edit():
-    form = EditForm()
+    form = EditForm(g.user.nickname)
     if form.validate_on_submit():
         g.user.nickname = form.nickname.data
         g.user.about_me = form.about_me.data
@@ -131,8 +131,6 @@ def edit():
 
 @app.errorhandler(404)
 def not_found_error(error):
-    app.logger.info('404 error.')
-    app.logger.debug(error.message)
     return render_template('404.html'), 404
 
 
